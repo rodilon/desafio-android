@@ -2,6 +2,8 @@ package br.com.renan.desafioandroid
 
 import android.app.Application
 import br.com.renan.desafioandroid.provider.NetworkProvider
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 class DesafioApplication : Application() {
 
@@ -11,6 +13,10 @@ class DesafioApplication : Application() {
     }
 
     private fun init() {
+        startKoin {
+            androidContext(this@DesafioApplication)
+            modules(appModules)
+        }
         NetworkProvider.init()
     }
 }
