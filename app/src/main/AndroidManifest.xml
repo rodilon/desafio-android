@@ -17,7 +17,7 @@
         <activity android:name=".pullrequest.view.PullRequestActivity"
                   android:configChanges="orientation|keyboardHidden">
         </activity>
-        <activity android:name=".repository.view.RepositoryActivity"
+        <activity android:name=".repository.RepositoryActivity"
                   android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

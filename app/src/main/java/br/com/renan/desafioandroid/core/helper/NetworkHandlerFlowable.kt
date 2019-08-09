@@ -1,6 +1,7 @@
-package br.com.renan.desafioandroid
+package br.com.renan.desafioandroid.core.helper
 
 import android.arch.lifecycle.MutableLiveData
+import br.com.renan.desafioandroid.core.base.BaseViewModel
 import io.reactivex.Flowable
 import java.io.IOException
 
@@ -20,7 +21,12 @@ data class NetworkHandlerFlowable<T>(val observable: Flowable<T>) {
 
     private fun handleError(liveData: MutableLiveData<Resource<T>>, it: Throwable) {
         if (it is IOException) {
-            liveData.postValue(Resource.error(it, Status.INTERNET))
+            liveData.postValue(
+                Resource.error(
+                    it,
+                    Status.INTERNET
+                )
+            )
         } else {
             liveData.postValue(Resource.error(it))
         }

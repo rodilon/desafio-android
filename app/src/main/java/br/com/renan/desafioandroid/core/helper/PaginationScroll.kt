@@ -1,4 +1,4 @@
-package br.com.renan.desafioandroid.util
+package br.com.renan.desafioandroid.core.helper
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView

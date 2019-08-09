@@ -11,9 +11,7 @@ import br.com.renan.desafioandroid.model.data.PullRequest
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_pull_request.view.*
 
-class PullRequestAdapter(pullRequestItemsList: List<PullRequest>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    private val recyclerList: List<PullRequest> = pullRequestItemsList
+class PullRequestAdapter(private val recyclerList: List<PullRequest>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): RecyclerView.ViewHolder {
         return ViewHolder(
@@ -43,7 +41,7 @@ class PullRequestAdapter(pullRequestItemsList: List<PullRequest>) : RecyclerView
             tvPullRequestUserName.text = pullRequest.user.login
             tvPullRequestFullName.text = pullRequest.user.login
 
-            itemView.setOnClickListener {
+            this.setOnClickListener {
                 val openBrowser = Intent(Intent.ACTION_VIEW)
                 openBrowser.data = Uri.parse(pullRequest.html_url)
                 context.startActivity(openBrowser)

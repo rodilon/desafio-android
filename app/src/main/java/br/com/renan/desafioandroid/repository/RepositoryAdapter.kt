@@ -1,4 +1,4 @@
-package br.com.renan.desafioandroid.repository.view
+package br.com.renan.desafioandroid.repository
 
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
@@ -11,9 +11,7 @@ import br.com.renan.desafioandroid.pullrequest.view.PullRequestActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_repository.view.*
 
-class RepositoryAdapter(repositoryItemsList: List<Repository>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    private val recyclerList: List<Repository> = repositoryItemsList
+class RepositoryAdapter(private val recyclerList: List<Repository>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): RecyclerView.ViewHolder {
         return ViewHolder(
@@ -44,8 +42,8 @@ class RepositoryAdapter(repositoryItemsList: List<Repository>) : RecyclerView.Ad
             tvRepositoryUserName.text = repository.owner.login
             tvRepositoryFullName.text = repository.fullName.replace("/", " ")
 
-            itemView.setOnClickListener { itemView ->
-                val intent = Intent(itemView.context, PullRequestActivity::class.java)
+            this.setOnClickListener { v ->
+                val intent = Intent(v.context, PullRequestActivity::class.java)
                 intent.putExtra("creator", repository.owner.login)
                 intent.putExtra("repository", repository.name)
                 context.startActivity(intent)

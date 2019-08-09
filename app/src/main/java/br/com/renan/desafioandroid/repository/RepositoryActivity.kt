@@ -1,4 +1,4 @@
-package br.com.renan.desafioandroid.repository.view
+package br.com.renan.desafioandroid.repository
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -6,9 +6,8 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.View
-import br.com.renan.desafioandroid.RepositoryViewModel
 import br.com.renan.desafioandroid.model.data.Repository
-import br.com.renan.desafioandroid.util.PaginationScroll
+import br.com.renan.desafioandroid.core.helper.PaginationScroll
 import kotlinx.android.synthetic.main.activity_repository.*
 import kotlinx.android.synthetic.main.error_layout.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -16,7 +15,6 @@ import org.koin.android.ext.android.inject
 import br.com.renan.desafioandroid.*
 
 
-private const val KEY_RECYCLER_STATE = "recycler_state"
 
 
 class RepositoryActivity : AppCompatActivity() {
@@ -31,12 +29,6 @@ class RepositoryActivity : AppCompatActivity() {
 
     private val repositoryViewModel: RepositoryViewModel by inject()
 
-    private var bundleRecyclerViewState: Bundle? = null
-
-    var index = -1
-    var top = -1
-    var layoutManager: LinearLayoutManager = LinearLayoutManager(this)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repository)
@@ -50,55 +42,6 @@ class RepositoryActivity : AppCompatActivity() {
         initObservers()
     }
 
-    override fun onPause() {
-        super.onPause()
-        index = layoutManager.findFirstVisibleItemPosition()
-        val v = repositoryRecycler.getChildAt(0)
-        top = if (v == null) 0 else v.top - repositoryRecycler.paddingTop
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (index != -1) {
-            layoutManager.scrollToPositionWithOffset(index, top)
-        }
-    }
-
-//    override fun onSaveInstanceState(outState: Bundle?) {
-//        super.onSaveInstanceState(outState)
-//        if (outState != null) {
-//            val scrollPosition = (repositoryRecycler.layoutManager as LinearLayoutManager)
-//                .findFirstCompletelyVisibleItemPosition()
-//            mRecipeListParcelable = linearLayoutManager.onSaveInstanceState()
-//            outState.putParcelable("KEY_LAYOUT", mRecipeListParcelable)
-//            outState.putInt("POSITION", scrollPosition)
-//        }
-//
-//    }
-//
-//    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-//        super.onRestoreInstanceState(savedInstanceState)
-//        if(savedInstanceState != null) {
-//            mRecipeListParcelable = savedInstanceState.getParcelable("KEY_LAYOUT")
-//            mScrollPosition = savedInstanceState.getInt("POSITION")
-//        }
-//    }
-
-//    override fun onPause() {
-//        super.onPause()
-//        bundleRecyclerViewState = Bundle()
-//        val listState: Parcelable? = repositoryRecycler.layoutManager?.onSaveInstanceState()
-//        bundleRecyclerViewState?.putParcelable(KEY_RECYCLER_STATE, listState)
-//    }
-//
-//    override fun onResume() {
-//        super.onResume()
-//        if (bundleRecyclerViewState != null) {
-//            val listState: Parcelable? = bundleRecyclerViewState!!.getParcelable(KEY_RECYCLER_STATE)
-//            repositoryRecycler.layoutManager?.onRestoreInstanceState(listState)
-//        }
-//    }
-
     private fun fetchData(page: Int) {
         repositoryViewModel.getRepositoryData(page)
     }
@@ -106,7 +49,7 @@ class RepositoryActivity : AppCompatActivity() {
     private fun initObservers() {
         showRepositoryLoading()
         repositoryViewModel.repositoryResult.observeResource(this, onSuccess = {
-            showRepositorySucess()
+            showRepositorySuccess()
             successRepository(it.repositoryItemsList)
         }, onError = {
             showRepositoryError()
@@ -133,6 +76,8 @@ class RepositoryActivity : AppCompatActivity() {
 
     private fun initListeners() {
         ivError.setOnClickListener {
+            pbRepository.visibility = View.VISIBLE
+            include_error_repository.visibility = View.GONE
             fetchData(page)
         }
 
@@ -154,10 +99,6 @@ class RepositoryActivity : AppCompatActivity() {
         })
     }
 
-//    private fun init(page: Int) {
-//        repositoryPresenter.requestRepositoryData(page)
-//    }
-
     private fun showRepositoryLoading() {
         pbRepository.visibility = View.VISIBLE
         include_error_repository.visibility = View.GONE
@@ -170,7 +111,8 @@ class RepositoryActivity : AppCompatActivity() {
         pbBottom.visibility = View.GONE
     }
 
-    private fun showRepositorySucess() {
+    private fun showRepositorySuccess() {
+        include_error_repository.visibility = View.GONE
         pbRepository.visibility = View.GONE
         repositoryRecycler.visibility = View.VISIBLE
         pbBottom.visibility = View.GONE

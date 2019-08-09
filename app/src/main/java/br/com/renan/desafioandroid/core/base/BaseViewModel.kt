@@ -1,4 +1,4 @@
-package br.com.renan.desafioandroid
+package br.com.renan.desafioandroid.core.base
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
