@@ -2,10 +2,10 @@ package br.com.renan.desafioandroid.pullrequest.view
 
 import android.content.Intent
 import android.net.Uri
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import br.com.renan.desafioandroid.R
 import br.com.renan.desafioandroid.model.data.PullRequest
 import com.squareup.picasso.Picasso

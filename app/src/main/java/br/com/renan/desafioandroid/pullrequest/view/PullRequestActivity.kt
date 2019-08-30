@@ -1,11 +1,11 @@
 package br.com.renan.desafioandroid.pullrequest.view
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.Toolbar
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.renan.desafioandroid.R
 import br.com.renan.desafioandroid.model.data.PullRequest
 import br.com.renan.desafioandroid.pullrequest.presentation.IPullRequestContract
@@ -47,9 +47,9 @@ class PullRequestActivity : AppCompatActivity(), IPullRequestContract.View {
 
     private fun setupToolbar(toolbar: Toolbar) {
         toolbar.setNavigationIcon(R.drawable.ic_arrow_left)
-        toolbar.setNavigationOnClickListener(View.OnClickListener() {
+        toolbar.setNavigationOnClickListener {
             onBackPressed()
-        })
+        }
         toolbar_title.text = repoName
     }
 
@@ -81,10 +81,10 @@ class PullRequestActivity : AppCompatActivity(), IPullRequestContract.View {
     }
 
     override fun showTotalPulls(pulls: List<PullRequest>) {
-        for (pull in pulls) {
-            if (pull.state == "open")
+        pulls.forEach {
+            if (it.state == "open")
                 open++
-            else if (pull.state == "closed")
+            else if (it.state == "closed")
                 close++
         }
         tvPullRequestAvatar.text = getString(R.string.open_close_pulls, open, close)

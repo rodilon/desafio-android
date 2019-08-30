@@ -1,11 +1,11 @@
 package br.com.renan.desafioandroid.repository
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.Toolbar
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.renan.desafioandroid.model.data.Repository
 import br.com.renan.desafioandroid.core.helper.PaginationScroll
 import kotlinx.android.synthetic.main.activity_repository.*
@@ -13,9 +13,6 @@ import kotlinx.android.synthetic.main.error_layout.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.koin.android.ext.android.inject
 import br.com.renan.desafioandroid.*
-
-
-
 
 class RepositoryActivity : AppCompatActivity() {
 

@@ -19,4 +19,9 @@
     <string name="username_repository">username</string>
     <string name="full_name_repository">Nome Sobrenome</string>
     <string name="title_toolbar_repository">Github JavaPop</string>
+
+    <!--content description repository-->
+    <string name="picture_owner_repository">Imagem do dono do repositório</string>
+    <string name="picture_owner_pull_request">Imagem do dono do pull request</string>
+    <string name="list_pull_request_empyt_description">Imagem de erro</string>
 </resources>

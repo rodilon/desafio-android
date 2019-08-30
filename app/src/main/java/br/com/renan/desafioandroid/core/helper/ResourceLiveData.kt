@@ -1,8 +1,8 @@
 package br.com.renan.desafioandroid.core.helper
 
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 
 class ResourceLiveData<T> : MutableLiveData<Resource<T>>() {
 

@@ -1,6 +1,6 @@
 package br.com.renan.desafioandroid.core.helper
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import br.com.renan.desafioandroid.core.base.BaseViewModel
 import io.reactivex.Flowable
 import java.io.IOException
