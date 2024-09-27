@@ -1,4 +1,4 @@
-package br.com.renan.desafioandroid.pullrequest.view
+package br.com.renan.desafioandroid.pullrequest.presentation
 
 import android.content.Intent
 import android.net.Uri
@@ -7,17 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.renan.desafioandroid.R
+import br.com.renan.desafioandroid.databinding.ItemPullRequestBinding
 import br.com.renan.desafioandroid.model.data.PullRequest
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_pull_request.view.*
 
 class PullRequestAdapter(private val recyclerList: List<PullRequest>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private lateinit var binding: ItemPullRequestBinding
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): RecyclerView.ViewHolder {
-        return ViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_pull_request, parent, false)
-        )
+        binding = ItemPullRequestBinding.inflate(LayoutInflater.from(parent.context))
+        return ViewHolder(binding.root)
     }
 
     override fun getItemCount(): Int {
@@ -25,21 +24,24 @@ class PullRequestAdapter(private val recyclerList: List<PullRequest>) : Recycler
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ViewHolder).bind(recyclerList[position])
+        (holder as ViewHolder).bind(
+            recyclerList[position],
+            binding
+        )
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(pullRequest: PullRequest) = with(itemView) {
+        fun bind(pullRequest: PullRequest, binding: ItemPullRequestBinding) = with(itemView) {
 
             Picasso.get()
                 .load(pullRequest.user.avatarUrl)
-                .into(ivPullRequestAvatar)
+                .into(binding.ivPullRequestAvatar)
 
-            tvPullRequestName.text = pullRequest.title
-            tvPullRequestDescription.text =
-                if (pullRequest.body.isEmpty()) context.getString(R.string.description_not_found) else pullRequest.body
-            tvPullRequestUserName.text = pullRequest.user.login
-            tvPullRequestFullName.text = pullRequest.user.login
+            binding.tvPullRequestName.text = pullRequest.title
+            binding.tvPullRequestDescription.text =
+                if (pullRequest.body.isNullOrEmpty()) context.getString(R.string.description_not_found) else pullRequest.body
+            binding.tvPullRequestUserName.text = pullRequest.user.login
+            binding.tvPullRequestFullName.text = pullRequest.user.login
 
             this.setOnClickListener {
                 val openBrowser = Intent(Intent.ACTION_VIEW)
