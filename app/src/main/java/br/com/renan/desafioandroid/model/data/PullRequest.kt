@@ -1,17 +1,17 @@
 package br.com.renan.desafioandroid.model.data
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
 
-data class PullRequest (
-    @field:Json(name = "title") val title: String,
-    @field:Json(name = "created_at") val createDate: String,
-    @field:Json(name = "body") val body: String,
-    @field:Json(name = "user") val user: User,
-    @field:Json(name = "state") val state: String,
-    @field:Json(name = "html_url") val html_url: String
+data class PullRequest(
+    @SerializedName("title") val title: String,
+    @SerializedName("created_at") val createDate: String,
+    @SerializedName("body") val body: String?,
+    @SerializedName("user") val user: User,
+    @SerializedName("state") val state: String,
+    @SerializedName("html_url") val html_url: String,
 )
 
-data class User (
-    @field:Json(name = "login") val login: String,
-    @field:Json(name = "avatar_url") val avatarUrl: String
+data class User(
+    @SerializedName("login") val login: String,
+    @SerializedName("avatar_url") val avatarUrl: String,
 )
