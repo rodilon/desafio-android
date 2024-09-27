@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/clErrorLayoutRepository"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/clErrorLayoutRepository">
+        android:layout_height="wrap_content">
 
-    <ImageView
-            android:contentDescription="@string/list_pull_request_empyt_description"
+        <ImageView
             android:id="@+id/ivEmptyLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/list_pull_request_empyt_description"
             android:src="@drawable/ic_alert_circle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+        <TextView
             android:id="@+id/txError"
-            android:text="@string/list_pull_request_empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/ivEmptyLayout"
+            android:text="@string/list_pull_request_empty"
             app:layout_constraintEnd_toEndOf="@id/ivEmptyLayout"
-            app:layout_constraintTop_toBottomOf="@id/ivEmptyLayout"/>
+            app:layout_constraintStart_toStartOf="@id/ivEmptyLayout"
+            app:layout_constraintTop_toBottomOf="@id/ivEmptyLayout" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
